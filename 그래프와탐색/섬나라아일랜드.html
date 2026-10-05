@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>출력결과</title>
+</head>
+
+<body>
+    <script>
+        /*
+        N*N의 섬나라 아일랜드의 지도가 격자판의 정보로 주어집니다. 각 섬은 1로 표시되어 상하좌
+        우와 대각선으로 연결되어 있으며, 0은 바다입니다. 섬나라 아일랜드에 몇 개의 섬이 있는지
+        구하는 프로그램을 작성하세요
+        */
+        function solution(board) {
+            const n = board.length;
+            let answer = 0
+
+            const visited = Array.from(
+                { length: n },
+                () => Array(n).fill(false)
+            )
+            const dx = [0, 0, -1, 1, -1, 1, -1, 1]
+            const dy = [-1, 1, 0, 0, -1, -1, 1, 1]
+            function DFS(x, y) {
+                visited[y][x] = true
+                for (let i = 0; i < 8; i++) {
+                    const nx = x + dx[i]
+                    const ny = y + dy[i]
+                    if (
+                        nx >= 0 && nx < n &&
+                        ny >= 0 && ny < n &&
+                        board[ny][nx] === 1 &&
+                        !visited[ny][nx]
+                    ) {
+                        DFS(nx, ny)
+                    }
+                }
+            }
+
+            for (let y = 0; y < n; y++) {
+                for (let x = 0; x < n; x++) {
+                    if (board[y][x] === 1 && !visited[y][x]) {
+                        answer++
+                        DFS(x, y)
+                    }
+                }
+            }
+
+
+            return answer
+        }
+
+        let arr = [[1, 1, 0, 0, 0, 1, 0],
+        [0, 1, 1, 0, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0],
+        [1, 0, 1, 0, 1, 0, 0]];
+
+        console.log(solution(arr));
+    </script>
+</body>
+
+</html>

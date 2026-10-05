@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>출력결과</title>
+</head>
+
+<body>
+    <script>
+        function solution(n) {
+            function DFS(L) {
+                if (L === 1 || L === 0) return 1
+                else return L * DFS(L - 1)
+            }
+
+            return DFS(n)
+        }
+
+        console.log(solution(5));
+    </script>
+</body>
+
+</html>
