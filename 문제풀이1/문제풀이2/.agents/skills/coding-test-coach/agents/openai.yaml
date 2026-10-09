@@ -1,4 +1,0 @@
-interface:
-  display_name: "코딩 테스트 도우미"
-  short_description: "단계별 힌트부터 풀이 구현, 오답 분석과 반례 검증까지 지원"
-  default_prompt: "$coding-test-coach를 사용해 이 문제의 조건과 내 접근을 살펴보고, 요청한 수준에 맞춰 풀이를 도와줘."
