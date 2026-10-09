@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>출력결과</title>
+</head>
+
+<body>
+    <script>
+        /*
+        가장 윗줄에 1부터 N까지의 숫자가 한 개씩 적혀 있다. 그리고 둘째 줄부터 차례대로 파스칼의 삼각형처럼 위의 두개를 더한 값이 저장되게 된다. 예를 들어 N이 4 이고 가장 윗 줄에 
+        31 2 4 가 있다고 했을 때, 다음과 같은 삼각형이 그려진다.
+            3 1 2 4
+            4 3 6
+            7 9
+            16
+            N과 가장 밑에 있는 숫자가 주어져 있을 때 가장 윗줄에 있는 숫자를 구하는 프로그램을 작성하
+            시오. 단, 답이 여러가지가 나오는 경우에는 사전순으로 가장 앞에 오는 것을 출력하여야 한다.
+        */
+        function solution(n, f) {
+            let ch = Array.from({ length: n }, () => 0)
+            let used = Array(n + 1).fill(false)
+            let answer;
+            let coef = [1]
+
+            for (let size = 2; size <= n; size++) {
+                let next = Array.from({ length: size }, () => 1)
+                for (let i = 1; i < size - 1; i++) {
+                    next[i] = coef[i - 1] + coef[i]
+                }
+                coef = next
+            }
+
+            function DFS(level) {
+                if (answer !== undefined) return
+                if (level === n) {
+                    let sum = 0
+                    for (let i = 0; i < n; i++) {
+                        sum += ch[i] * coef[i]
+                    }
+                    if (sum === f) {
+                        answer = [...ch]
+                    }
+                    return
+                }
+                for (let num = 1; num <= n; num++) {
+                    if (used[num] === true) continue
+                    ch[level] = num
+                    used[num] = true
+                    DFS(level + 1)
+                    used[num] = false
+                }
+            }
+            DFS(0)
+            return answer;
+        }
+
+        console.log(solution(4, 16));
+    </script>
+</body>
+
+</html>

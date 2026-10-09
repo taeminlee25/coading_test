@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>출력결과</title>
+</head>
+
+<body>
+    <script>
+        /*
+하지만 여러분은 이 공식을 쓰지않고 다음 공식을 사용하여
+재귀를 이용해 조합수를 구해주는 프로그램을 작성하세요. 
+        */
+        function solution(n, r) {
+            function DFS(n, r) {
+                if (n === r || r === 0) return 1
+                return DFS(n - 1, r - 1) + DFS(n - 1, r)
+            }
+
+            return answer;
+        }
+
+        console.log(solution(5, 3));
+    </script>
+</body>
+
+</html>

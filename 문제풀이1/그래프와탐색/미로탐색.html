@@ -1,0 +1,59 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>출력결과</title>
+</head>
+
+<body>
+    <script>
+        /*
+        7*7 격자판 미로를 탈출하는 경로의 가지수를 출력하는 프로그램을 작성하세요.
+        출발점은 격자의 (1, 1) 좌표이고, 탈출 도착점은 (7, 7)좌표이다. 
+        격자판의 1은 벽이고, 0은 통로이다. 격자판의 움직임은 상하좌우로만 움직인다.
+        미로가 다음과 같다면
+        */
+        function solution(board) {
+            let answer = 0
+            let n = board.length
+            const visited = Array.from(
+                { length: n }, () => Array(n).fill(false)
+            )
+
+
+            function DFS(x, y) {
+                if (x === n - 1 && y === n - 1) {
+                    answer++
+                    return
+                }
+                const dx = [0, 0, -1, 1] // 가로
+                const dy = [-1, 1, 0, 0] // 세로
+                for (let i = 0; i < 4; i++) {
+                    const nx = x + dx[i]
+                    const ny = y + dy[i]
+                    if (nx >= 0 && nx < n && ny >= 0 && ny < n && board[ny][nx] === 0 && !visited[ny][nx]) {
+                        visited[ny][nx] = true
+                        DFS(nx, ny)
+                        visited[ny][nx] = false
+                    }
+                }
+            }
+            visited[0][0] = true;
+            DFS(0, 0);
+            visited[0][0] = false;
+            return answer;
+        }
+
+        let arr = [[0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 1, 0, 0, 0],
+        [1, 1, 0, 1, 0, 1, 1],
+        [1, 1, 0, 0, 0, 0, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0]];
+
+        console.log(solution(arr));
+    </script>
+</body>
+
+</html>
