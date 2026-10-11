@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>출력결과</title>
+</head>
+
+<body>
+    <script>
+        /*
+        N(1<=N<=100)명의 학생의 국어점수가 입력되면 
+        각 학생의 등수를 입력된 순서대로 출력하는
+        프로그램을 작성하세요
+        */
+        function solution(arr) {
+            let rank = []
+            for (let i = 0; i < arr.length; i++) {
+                let num = 1;
+                for (let j = 0; j < arr.length; j++) {
+                    if (arr[j] > arr[i]) num++
+                }
+                rank.push(num)
+            }
+            return rank
+        }
+
+        let arr = [87, 89, 92, 100, 76];
+        console.log(solution(arr));
+    </script>
+</body>
+
+</html>

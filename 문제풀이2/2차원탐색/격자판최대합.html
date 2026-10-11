@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>출력결과</title>
+</head>
+
+<body>
+    <script>
+        /*
+        5*5 격자판에 아래롸 같이 숫자가 적혀있습니다.
+        10 13 10 12 15
+        12 39 30 23 11
+        11 25 50 53 15
+        19 27 29 37 27
+        19 13 30 13 19
+        N*N의 격자판이 주어지면 각 행의 합, 각 열의 합, 두 대각선의 합 중 가장 큰 합을 출력합
+        니다.
+        */
+        function solution(arr) {
+            // let answer = 0
+            // const sumArr = []
+
+            // let diagonalSum = 0
+            // let reverseDiagonalSum = 0
+
+            // // 행, 열 합
+            // for (let i = 0; i < arr.length; i++) {
+            //     let colSum = 0
+            //     let rowSum = 0
+
+
+            //     for (let j = 0; j < arr.length; j++) {
+            //         // 행
+            //         rowSum += arr[i][j]
+            //         // 열
+            //         colSum += arr[j][i]
+            //     }
+
+            //     diagonalSum += arr[i][i]
+            //     reverseDiagonalSum += arr[i][(arr.length - 1) - i]
+
+            //     sumArr.push(colSum)
+            //     sumArr.push(rowSum)
+
+            // }
+            // sumArr.push(diagonalSum)
+            // sumArr.push(reverseDiagonalSum)
+
+            // answer = Math.max(...sumArr)
+
+            // return answer;
+
+            const n = arr.length
+            let answer = Number.MIN_SAFE_INTEGER
+            let diagonal = 0
+            let reverseDiagonal = 0
+
+            for (let i = 0; i < n; i++) {
+                let row = 0
+                let col = 0
+
+                for (let j = 0; j < n; j++) {
+                    row += arr[i][j]
+                    col += arr[j][i]
+                }
+
+                answer = Math.max(answer, row, col)
+                diagonal += arr[i][i]
+                reverseDiagonal += arr[i][n - 1 - i]
+            }
+            return Math.max(answer, diagonal, reverseDiagonal)
+        }
+
+        let arr = [[10, 13, 10, 12, 15],
+        [12, 39, 30, 23, 11],
+        [11, 25, 50, 53, 15],
+        [19, 27, 29, 37, 27],
+        [19, 13, 30, 13, 19]];
+        console.log(solution(arr));
+    </script>
+</body>
+
+</html>
